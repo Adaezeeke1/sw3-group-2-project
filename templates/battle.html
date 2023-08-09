@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href = "main.css" rel = "stylesheet">
+    <title>Result</title>
+</head>
+<body>
+    <div id = "cardContainer">
+        <div class = "playercard">
+            <p class = "name">Frida Kahlo</p>
+            <div class = "image"><img src = "frida.png"></div>
+            <div class = "cardbottom">
+                <div class = "attributes">
+                    <p class = "playerattribute">Singing Voice: 2</p>
+                    <p class = "playerattribute">Creativity: 10</p>
+                    <p class = "playerattribute">Painting: 10</p>
+                    <p class = "playerattribute">Composing: 2</p>
+                </div>
+                <div id = "description"><p></p></div>
+            </div>
+        </div>
+        <div class = "computercard">
+            <p class = "name">"Make the World Better With Music"</p>
+            <div class = "image"><img src = "music.jpg"></div>
+                <div class = "attributes">
+                    <button onclick = "compareValues(0)"><p class = "computerattribute">Singing Voice</p></button>
+                    <button onclick = "compareValues(1)"><p class = "computerattribute">Creativity</p></button>
+                    <button onclick = "compareValues(2)"><p class = "computerattribute">Composing</p></button>
+                </div>
+        </div>
+    </div>
+    <div class = "center"><div class = "resultContainer"><p id = "result"></p></div></div>
+    <script src = "app.js"></script>
+</body>
+</html>

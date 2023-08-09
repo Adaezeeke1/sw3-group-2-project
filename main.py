@@ -1,6 +1,8 @@
 import random
 from project_knowledge import get_quote
+from flask import Flask, render_template
 
+app = Flask(__name__)
 class Card:
     def __init__(self, name, attributes, quote=None):
         self.name = name
@@ -173,6 +175,18 @@ class FeministHeroesVsChallenges:
             print("It's a tie! The battle was intense, but there's still more to conquer!")
 
 
+@app.route("/")
+def home():
+    game.challenge_deck.shuffle()
+    return render_template("index.html")
+
+@app.route("/submit/", methods=["POST", "GET"])
+def choose_cards():
+    game.challenge_card = game.challenge_deck.draw()
+    return render_template("choose_cards.html", player_cards=game.player.cards, challenge_card=game.challenge_card)
+
+
 if __name__ == "__main__":
     game = FeministHeroesVsChallenges()
-    game.play_game()
+    # game.play_game()
+    app.run(debug=True)

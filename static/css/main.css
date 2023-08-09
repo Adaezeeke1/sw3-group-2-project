@@ -1,0 +1,181 @@
+body {
+    background-color: black;
+}
+
+#cardContainer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    color: #ffedc7;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+    font-family:'Courier New', Courier, monospace
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.playButton {
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+}
+
+.playercard {
+    border-radius: 8px;
+    background-color: #ffedc7;
+    outline: 0.2vw solid #ffedc7;
+    border: solid #c0985e 3px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    width: 400px;
+}
+
+.basicplayercard {
+    border-radius: 8px;
+    background-color: #ffedc7;
+    outline: 0.2vw solid #ffedc7;
+    border: solid #c0985e 3px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    width: 300px;
+}
+
+
+.computercard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 8px;
+    background-color: #ffedc7;
+    outline: 0.2vw solid #ffedc7;
+    border: solid #c0985e 3px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    width: 400px;
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.cardbottom {
+    display: flex;
+}
+
+#description {
+    display: flex;
+    flex-direction: column;
+    flex: 0.5;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 20px;
+}
+
+.attributes {
+    display: flex;
+    flex-direction: column;
+    flex: 0.5;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    margin: 5px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.playerattribute {
+    visibility: hidden;
+}
+
+.name {
+    display: flex;
+    justify-content: center;
+    font-size: x-large;
+}
+
+#challenge {
+    font-size: x-large;
+    text-align: center;
+}
+
+#result {
+    font-size: x-large;
+    text-align: center;
+}
+
+.challengeContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background-color: #ffedc7;
+    outline: 0.2vw solid #ffedc7;
+    border: solid #c0985e 3px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    width: 600px;
+    margin: 30px;   
+}
+
+.resultContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background-color: #ffedc7;
+    outline: 0.2vw solid #ffedc7;
+    border: solid #c0985e 3px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    width: 600px;
+    margin: 30px;
+}
+
+.image {
+    height: 250px;
+}
+img {
+    width: 200px;
+    border: solid #c0985e 3px;
+    margin: 10px;
+}
+
+button {
+    padding: 15px 25px;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    cursor: pointer;
+    outline: none;
+    background-color: #ffedc7;
+    border: none;
+    font-size: 16px;
+    border-radius: 15px;
+  }
+  
+  button:hover {background-color: #c0985e}
+  
+  button:active {
+    background-color: #c0985e;
+    box-shadow: 0 3px #c0985e;
+    transform: translateY(2px);
+  }
+
+  button:disabled {
+    color: black;
+  }
+
+  a {
+    display: flex;
+    justify-content: center;
+    color: black;
+  }
