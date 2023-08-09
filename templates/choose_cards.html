@@ -9,36 +9,32 @@
 <body>
     <div class = "mainContainer">
         <div class = "center"><div class = "challengeContainer"><p id = "challenge">Challenge: {{challenge_card.name}}</p></div></div>
-        <div id = "cardContainer">
-            <div class = "basicplayercard">
-                <p class = "name">{{player_cards[0].name}}</p>
-                <div class = "image"><img></div>
-            <form action="/submit" method="POST">
-                <input type = "button" name = "choice" id = 0 value = 0>
-            </form>
+        <form action = "/battle" method = "POST">
+            <div id = "cardContainer">
+                <div class = "basicplayercard">
+                    <p class = "name">{{player_cards[0].name}}</p>
+                    <div class = "image"><img></div>
+                    <input type = "radio" name = "choice" id = 0 value = 0>
+                </div>
+                <div class = "basicplayercard">
+                    <p class = "name">{{player_cards[1].name}}</p>
+                    <div class = "image"><img></div>
+                    <input type = "radio" name = "choice" id = 1 value = 1>
+                </div>
+                <div class = "basicplayercard">
+                    <p class = "name">{{player_cards[2].name}}</p>
+                    <div class = "image"><img></div>
+                    <input type = "radio" name = "choice" id = 2 value = 2>
+                </div>
+                <div class = "basicplayercard">
+                    <p class = "name">{{player_cards[3].name}}</p>
+                    <div class = "image"><img></div>
+                    <input type = "radio" name = "choice" id = 3 value = 3>
+                </div>
             </div>
-            <div class = "basicplayercard">
-                <p class = "name">{{player_cards[1].name}}</p>
-                <div class = "image"><img></div>
-            <form action="/submit" method="POST">
-                <input type = "button" name = "choice" id = 1 value = 1>
-            </form>
-            </div>
-            <div class = "basicplayercard">
-                <p class = "name">{{player_cards[2].name}}</p>
-                <div class = "image"><img></div>
-            <form action="/submit" method="POST">
-                <input type = "button" name = "choice" id = 2 value = 2>
-            </form>
-            </div>
-            <div class = "basicplayercard">
-                <p class = "name">{{player_cards[3].name}}</p>
-                <div class = "image"><img></div>
-            <form action="/submit" method="POST">
-                <input type = "button" name = "choice" id = 4 value = 4>
-            </form>
-            </div>
-        </div>
+            <div class = "playButton"><button type = "submit">Submit</button></div>
+        </form>
+
     </div>
 </body>
 </html>

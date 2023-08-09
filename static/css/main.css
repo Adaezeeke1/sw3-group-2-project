@@ -96,7 +96,7 @@ body {
 }
 
 .playerattribute {
-    visibility: hidden;
+    visibility: visible;
 }
 
 .name {

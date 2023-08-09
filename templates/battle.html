@@ -3,31 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href = "main.css" rel = "stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static',    filename='css/main.css') }}">
     <title>Result</title>
 </head>
 <body>
     <div id = "cardContainer">
         <div class = "playercard">
-            <p class = "name">Frida Kahlo</p>
-            <div class = "image"><img src = "frida.png"></div>
+            <p class = "name">{{player_card.name}}</p>
+            <div class = "image"><img></div>
             <div class = "cardbottom">
                 <div class = "attributes">
-                    <p class = "playerattribute">Singing Voice: 2</p>
-                    <p class = "playerattribute">Creativity: 10</p>
-                    <p class = "playerattribute">Painting: 10</p>
-                    <p class = "playerattribute">Composing: 2</p>
+                    {% for attribute, value in player_card.attributes.items(): %}
+                    <p class = "playerattribute">{{attribute}}: {{value}}</p>
+                    {%endfor%}
                 </div>
                 <div id = "description"><p></p></div>
             </div>
         </div>
         <div class = "computercard">
-            <p class = "name">"Make the World Better With Music"</p>
+            <p class = "name">{{challenge_card.name}}</p>
             <div class = "image"><img src = "music.jpg"></div>
                 <div class = "attributes">
-                    <button onclick = "compareValues(0)"><p class = "computerattribute">Singing Voice</p></button>
-                    <button onclick = "compareValues(1)"><p class = "computerattribute">Creativity</p></button>
-                    <button onclick = "compareValues(2)"><p class = "computerattribute">Composing</p></button>
+                    {% for attribute, value in challenge_card.attributes.items(): %}
+                    <button><p class = "computerattribute">{{attribute}}: {{value}}</p></button>
+                    {%endfor%}
                 </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 import random
 from project_knowledge import get_quote
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 class Card:
@@ -185,6 +185,11 @@ def choose_cards():
     game.challenge_card = game.challenge_deck.draw()
     return render_template("choose_cards.html", player_cards=game.player.cards, challenge_card=game.challenge_card)
 
+@app.route("/battle", methods=["POST", "GET"])
+def battle():
+    choice = request.form["choice"]
+    player_card = game.player.cards[int(choice)]
+    return render_template("battle.html", player_card = player_card, challenge_card = game.challenge_card)
 
 if __name__ == "__main__":
     game = FeministHeroesVsChallenges()
