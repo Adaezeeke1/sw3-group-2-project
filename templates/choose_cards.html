@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',    filename='css/main.css') }}">
+    <title>Choose Cards</title>
+</head>
+<body>
+    <div class = "mainContainer">
+        <div class = "center"><div class = "challengeContainer"><p id = "challenge">Challenge: {{challenge_card.name}}</p></div></div>
+        <form action = "/battle" method = "POST">
+            <div id = "cardContainer">
+                {% for i in range(0, length): %}
+                <div class = "basicplayercard">
+                    <p class = "name">{{player_cards[i].name}}</p>
+                    <div class = "image"><img></div>
+                    <input type = "radio" name = "choice" id = "card" value = {{i}}>
+                </div>
+                {%endfor%}
+            </div>
+            <div class = "playButton"><button type = "submit">Submit</button></div>
+        </form>
+
+    </div>
+</body>
+</html>

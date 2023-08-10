@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',    filename='css/main.css') }}">
+    <title>Choose Cards</title>
+</head>
+<body>
+    <div class = "mainContainer">
+        <div class = "title"><p>Game Over!</p></div>
+        <div class = "title"><p>{{win_status}}</p></div>
+        <div class = "title"><p>Computer Score: {{computer_score}}</p></div>
+        <div class = "title"><p>Player Score: {{player_score}}</p></div>
+    </div>
+</body>
+</html>

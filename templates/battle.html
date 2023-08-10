@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',    filename='css/main.css') }}">
+    <title>Result</title>
+</head>
+<body>
+    <div id = "cardContainer">
+        <div class = "playercard">
+            <p class = "name">{{player_card.name}}</p>
+            <div class = "image"><img></div>
+                <div class = "cardbottom">
+                    <div class = "attributes">
+                        {% for attribute, value in player_card.attributes.items(): %}
+                        <p class = "playerattribute"> ? </p>
+                        {%endfor%}
+                    </div>
+                    <div id = "description"><p></p></div>
+                </div>
+        </div>
+        <div class = "computercard">
+            <p class = "name">{{challenge_card.name}}</p>
+            <div class = "image"><img src = "music.jpg"></div>
+            <form action = "/results" method = "POST">
+                <div class = "attributes">
+                    {% for attribute, value in challenge_card.attributes.items(): %}
+                    <input type = "radio" name = "attribute" id = "attribute" value ={{'#'.join(attribute.split())}}>
+                    <label class = "computerattribute" for="attribute">{{attribute}}</label>
+                    {%endfor%}
+                </div>
+                <div class = "playButton"><button type = "submit">Submit</button></div>
+            </form>
+        </div>
+    </div>
+    <script src = "app.js"></script>
+</body>
+</html>
