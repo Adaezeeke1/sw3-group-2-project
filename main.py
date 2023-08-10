@@ -149,7 +149,8 @@ def battle():
 
 @app.route("/results", methods = ["POST", "GET"])
 def results():
-    chosen_attribute = request.form["attribute"]
+    chosen_attribute_hashed = request.form["attribute"]
+    chosen_attribute = chosen_attribute_hashed.replace("#", " ")
     print(chosen_attribute)
     results = game.compare_attributes(chosen_attribute)
     quote = game.get_quote()

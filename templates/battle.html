@@ -26,7 +26,7 @@
             <form action = "/results" method = "POST">
                 <div class = "attributes">
                     {% for attribute, value in challenge_card.attributes.items(): %}
-                    <input type = "radio" name = "attribute" id = "attribute" value ={{attribute}}>
+                    <input type = "radio" name = "attribute" id = "attribute" value ={{'#'.join(attribute.split())}}>
                     <label class = "computerattribute" for="attribute">{{attribute}}</label>
                     {%endfor%}
                 </div>
