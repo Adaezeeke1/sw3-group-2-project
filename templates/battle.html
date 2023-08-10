@@ -11,26 +11,29 @@
         <div class = "playercard">
             <p class = "name">{{player_card.name}}</p>
             <div class = "image"><img></div>
-            <div class = "cardbottom">
-                <div class = "attributes">
-                    {% for attribute, value in player_card.attributes.items(): %}
-                    <p class = "playerattribute">{{attribute}}: {{value}}</p>
-                    {%endfor%}
+                <div class = "cardbottom">
+                    <div class = "attributes">
+                        {% for attribute, value in player_card.attributes.items(): %}
+                        <p class = "playerattribute"> ? </p>
+                        {%endfor%}
+                    </div>
+                    <div id = "description"><p></p></div>
                 </div>
-                <div id = "description"><p></p></div>
-            </div>
         </div>
         <div class = "computercard">
             <p class = "name">{{challenge_card.name}}</p>
             <div class = "image"><img src = "music.jpg"></div>
+            <form action = "/results" method = "POST">
                 <div class = "attributes">
                     {% for attribute, value in challenge_card.attributes.items(): %}
-                    <button><p class = "computerattribute">{{attribute}}: {{value}}</p></button>
+                    <input type = "radio" name = "attribute" id = "attribute1" value ={{attribute}}>
+                    <label class = "computerattribute" for="attribute1">{{attribute}}</label>
                     {%endfor%}
                 </div>
+                <div class = "playButton"><button type = "submit">Submit</button></div>
+            </form>
         </div>
     </div>
-    <div class = "center"><div class = "resultContainer"><p id = "result"></p></div></div>
     <script src = "app.js"></script>
 </body>
 </html>

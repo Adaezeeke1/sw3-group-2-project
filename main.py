@@ -52,10 +52,8 @@ class PlayerDeck:
             if self.categories[category]:
                 card = random.choice(self.categories[category])
                 card.fetch_quote()
-
                 player_cards.append(card)
                 self.categories[category].remove(card)
-
         return player_cards
 
 
@@ -97,99 +95,77 @@ class FeministHeroesVsChallenges:
         self.player_score = 0
         self.computer_score = 0
 
-
-    def show_cards(self, cards):
-        # Display the cards to choose from
-        print("Cards:")
-        for i, card in enumerate(cards, 1):
-            print(f"{i}. {card.name}")
-
-    def choose_card(self):
-        self.show_cards(self.player.cards)
-        choice = int(input("Choose a card (1-4): ")) - 1
+    def choose_card(self, choice):
         return self.player.cards.pop(choice)
-
-    def play_round(self):
-        challenge_card = self.challenge_deck.draw()
-        print("\nNew Round!")
-        print(f"Challenge: {challenge_card.name}")
-        print("Challenge attributes:")
-        for attribute, value in challenge_card.attributes.items():
-            print(f"{attribute}: {value}")
-
-        player_card = self.choose_card()
-
-        attribute_choice = input("Choose an attribute to challenge: ")
-
-        # Check if the player card has the chosen attribute
-        if attribute_choice not in player_card.attributes:
-            print("You lose the round! Your card does not have the chosen attribute.")
-
-            if player_card.quote:
-                print(f"\n{player_card.name}'s quote: {player_card.quote}")
+    def compare_attributes(self, attribute_choice):
+        if attribute_choice not in self.player_card.attributes:
+            result = f"You lose the round! Your card does not have the {attribute_choice} attribute."
+            self.computer_score += 1
+            return result
+        else:
+            player_attribute_value = self.player_card.attributes[attribute_choice]
+            challenge_attribute_value = self.challenge_card.attributes[attribute_choice]
+            if player_attribute_value >= challenge_attribute_value:
+                result = f"Your {attribute_choice} of {player_attribute_value} is higher than " \
+                         f"{challenge_attribute_value}. You win the round!"
+                self.player_score += 1
+                return result
             else:
-                print(f"\n{player_card.name} has no available quote")
-            return
-
-        # Compare the chosen attribute between player and challenge cards
-        player_attribute_value = player_card.attributes[attribute_choice]
-        challenge_attribute_value = challenge_card.attributes[attribute_choice]
-
-        print(f"Your {attribute_choice}: {player_attribute_value}")
-        print(f"Challenge {attribute_choice}: {challenge_attribute_value}")
-
-        if player_attribute_value >= challenge_attribute_value:
-            # Player wins the round
-            print("You win the round!")
-            self.player_score += 1
+                result = f"Your {attribute_choice} of {player_attribute_value} is lower than " \
+                         f"{challenge_attribute_value}. You lose the round!"
+                self.computer_score += 1
+                return result
+    def get_quote(self):
+        if self.player_card.quote:
+            return f"{self.player_card.name}'s quote: {self.player_card.quote}"
         else:
-            # Player loses the round
-            print("You lose the round!")
+            return f"{self.player_card.name} has no available quote"
 
-        # Display quote of the player's chosen card
-        if player_card.quote:
-            print(f"\n{player_card.name}'s quote: {player_card.quote}")
-        else:
-            print(f"\n{player_card.name} has no available quote")
-
-    def play_game(self):
-        # Welcome message and deck shuffling
-        print("Welcome to Feminist Heroes vs. Challenges Battle!")
-        self.player_deck.cards = self.player_deck.generate_player_cards()
-
-        self.challenge_deck.shuffle()
-
-        while len(self.player.cards) > 0 and len(self.challenge_deck.cards) > 0:
-            self.play_round()
-
-        # Game over - determine the winner based on scores
-        print("\nBattle Over!")
-        print(f"Your score: {self.player_score}")
-        print(f"Computer's score: {self.computer_score}")
-
+    def check_win(self):
         if self.player_score > self.computer_score:
-            print("Congratulations! You defeated the challenges and made the world a better place!")
-        elif self.player_score < self.computer_score:
-            print("The challenges have proven to be tough. Keep striving for progress!")
+            return "Congratulations! You defeated the challenges and made the world a better place!"
+        elif self.computer_score > self.player_score:
+            return "The challenges have proven to be tough. Keep striving for progress!"
         else:
-            print("It's a tie! The battle was intense, but there's still more to conquer!")
-
-
-@app.route("/")
+            return "It's a tie! The battle was intense, but there's still more to conquer!"
+@app.route("/", methods=["POST", "GET"])
 def home():
-    game.challenge_deck.shuffle()
     return render_template("index.html")
 
 @app.route("/submit/", methods=["POST", "GET"])
 def choose_cards():
+    game.challenge_deck.shuffle()
     game.challenge_card = game.challenge_deck.draw()
-    return render_template("choose_cards.html", player_cards=game.player.cards, challenge_card=game.challenge_card)
+    length = len(game.player.cards)
+    return render_template("choose_cards.html", player_cards=game.player.cards,
+                           challenge_card=game.challenge_card, length = length)
 
 @app.route("/battle", methods=["POST", "GET"])
 def battle():
     choice = request.form["choice"]
-    player_card = game.player.cards[int(choice)]
-    return render_template("battle.html", player_card = player_card, challenge_card = game.challenge_card)
+    print(choice)
+    game.player_card = game.player.cards[int(choice)]
+    game.choose_card(int(choice))
+    return render_template("battle.html", player_card = game.player_card, challenge_card = game.challenge_card)
+
+@app.route("/results", methods = ["POST", "GET"])
+def results():
+    chosen_attribute = request.form["attribute"]
+    print(chosen_attribute)
+    results = game.compare_attributes(chosen_attribute)
+    quote = game.get_quote()
+    player_card_length = len(game.player.cards)
+    challenge_card_length = len(game.challenge_deck.cards)
+    return render_template("result.html", player_card=game.player_card, challenge_card=game.challenge_card,
+                           results = results, player_score = game.player_score,
+                           computer_score = game.computer_score, quote = quote,
+                           player_card_length = player_card_length, challenge_card_length = challenge_card_length)
+
+@app.route("/end", methods = ["POST", "GET"])
+def end_game():
+    win_status = game.check_win()
+    return render_template("end.html", win_status = win_status,
+                           computer_score = game.computer_score, player_score = game.player_score)
 
 if __name__ == "__main__":
     game = FeministHeroesVsChallenges()
