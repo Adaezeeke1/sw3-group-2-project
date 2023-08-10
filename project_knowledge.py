@@ -1,7 +1,8 @@
 import requests
+from utilities import API_KEY
 
 def get_quote(name):
-    api_key = "AIzaSyACR8zhfjcuo0D_y_w4FTZS8R4_cdS2pvY"
+    api_key = API_KEY
     service_url = 'https://kgsearch.googleapis.com/v1/entities:search'
     params = {
         'query': name,

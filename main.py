@@ -143,7 +143,6 @@ def choose_cards():
 @app.route("/battle", methods=["POST", "GET"])
 def battle():
     choice = request.form["choice"]
-    print(choice)
     game.player_card = game.player.cards[int(choice)]
     game.choose_card(int(choice))
     return render_template("battle.html", player_card = game.player_card, challenge_card = game.challenge_card)
