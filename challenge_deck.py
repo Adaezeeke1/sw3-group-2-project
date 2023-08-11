@@ -4,10 +4,10 @@ from card_class import Card
 class ChallengeDeck:
     def __init__(self):
         self.cards = [
-            Card("Make the world better with music", {'Singing Voice': 8, 'Creativity': 5, 'Composing': 4}, None),
-            Card("Justice System needs reform!", {'Intelligence': 6, 'Political Influence': 7, 'Rebellious': 8}, None),
-            Card("Women can be Heroes", {'Strength': 8, 'Speed': 8, 'Courage': 6}, None),
-            Card("Mathematical mind", {'Intelligence': 8, 'Good at maths': 10, 'Research': 6}, None)
+            Card("Make the world better with music", "music.jpg", {'Singing Voice': 8, 'Creativity': 5, 'Composing': 4}, None),
+            Card("Justice System needs reform!", "justice.png", {'Intelligence': 6, 'Political Influence': 7, 'Rebellious': 8}, None),
+            Card("Women can be Heroes", "hero.jpg", {'Strength': 8, 'Speed': 8, 'Courage': 6}, None),
+            Card("Mathematical mind", "math.png", {'Intelligence': 8, 'Good at maths': 10, 'Research': 6}, None),
         ]
         # fetching quote to apply to card
         self.fetch_quotes()

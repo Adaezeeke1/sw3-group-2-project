@@ -4,36 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static',    filename='css/main.css') }}">
-    <title>Result</title>
+    <title>Choose an Attribute</title>
 </head>
 <body>
-    <div id = "cardContainer">
-        <div class = "playercard">
-            <p class = "name">{{player_card.name}}</p>
-            <div class = "image"><img></div>
-                <div class = "cardbottom">
+    <div class = "paddingContainer">
+        <div class = "cardContainer">
+            <div class = "playercard">
+                <p class = "name">{{player_card.name}}</p>
+                <div class = "imageContainer"><img class = "img" src="{{ url_for('static',filename='images/{}'.format(player_card.image))}}"></div>
+                        <div class = "attributes">
+                            {% for attribute, value in player_card.attributes.items(): %}
+                            <p> ? </p>
+                            {%endfor%}
+                        </div>
+            </div>
+            <div class = "computercard">
+                <p class = "name">{{challenge_card.name}}</p>
+                <div class = "imageContainer"><img class = "img" src="{{ url_for('static',filename='images/{}'.format(challenge_card.image))}}"></div>
+                <form action = "/results" method = "POST">
                     <div class = "attributes">
-                        {% for attribute, value in player_card.attributes.items(): %}
-                        <p class = "playerattribute"> ? </p>
+                        {% for attribute, value in challenge_card.attributes.items(): %}
+                        <div class = "radioContainer">
+                            <input type = "radio" name = "attribute" id = "attribute" value ={{'#'.join(attribute.split())}}>
+                            <label class = "computerattribute" for="attribute">{{attribute}}</label>
+                        </div>
                         {%endfor%}
                     </div>
-                    <div id = "description"><p></p></div>
-                </div>
-        </div>
-        <div class = "computercard">
-            <p class = "name">{{challenge_card.name}}</p>
-            <div class = "image"><img src = "music.jpg"></div>
-            <form action = "/results" method = "POST">
-                <div class = "attributes">
-                    {% for attribute, value in challenge_card.attributes.items(): %}
-                    <input type = "radio" name = "attribute" id = "attribute" value ={{'#'.join(attribute.split())}}>
-                    <label class = "computerattribute" for="attribute">{{attribute}}</label>
-                    {%endfor%}
-                </div>
-                <div class = "playButton"><button type = "submit">Submit</button></div>
-            </form>
+                    <div class = "horizontalContainer"><button class = "cardButton" type = "submit">Choose this Attribute</button></div>
+                </form>
+            </div>
         </div>
     </div>
-    <script src = "app.js"></script>
 </body>
 </html>
