@@ -38,7 +38,9 @@ class PlayerDeck:
                      {'Intelligence': 10, 'Political Influence': 10, 'Leadership': 10, 'Empowerment': 9}),
             ],
             "Sports": [
-                Card("Serena Williams", "serenawilliams.jpg", {'Physical Fitness': 10, 'Determination': 9, 'Resilience': 8, 'Confidence': 8}),
+                Card("Serena Williams", "serenawilliams.jpeg", {'Physical Fitness': 9, 'Determination': 9, 'Resilience': 8, 'Confidence': 8}),
+                Card("Fu Yuanhui", "fuyuanhui.jpg", {'Physical Fitness': 8, 'Rebellious': 10, 'Determination': 8, 'Resilience': 7}),
+
             ]
         }
 
