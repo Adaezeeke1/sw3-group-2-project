@@ -37,6 +37,9 @@ class PlayerDeck:
                 Card("Michelle Obama", "michelle.jpg",
                      {'Intelligence': 10, 'Political Influence': 10, 'Leadership': 10, 'Empowerment': 9}),
             ],
+            "Sports": [
+                Card("Serena Williams", "placeholder.png", {'Physical Fitness': 10, 'Determination': 9, 'Resilience': 8, 'Confidence': 8}),
+            ]
         }
 
         self.cards = self.generate_player_cards()
