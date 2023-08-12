@@ -19,7 +19,7 @@ class PlayerDeck:
                 Card("Ruth Bader Ginsburg", "ruth.jpg",
                      {'Intelligence': 9, 'Political Influence': 9, 'Determination': 6, 'Rebellious': 9}),
                 Card("Hypatia", "placeholder.png", {'Intelligence': 10, 'Political Influence': 3, 'Determination': 9, 'Rebellious': 10}),
-                Card("Rosa Parks", "rosa.jpg", {'Intelligence': 8, 'Courage': 10, 'Resilience': 9, 'Rebellious': 10}),
+                Card("Rosa Parks", "rosa.jpg", {'Intelligence': 8, 'Determination': 10, 'Resilience': 9, 'Rebellious': 10}),
             ],
             "Activist": [
                 Card("Florence Given", "placeholder.png", {'Confidence': 10, 'Activism': 10, 'Empowerment': 9, 'Social Influence': 8}),
