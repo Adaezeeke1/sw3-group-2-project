@@ -77,7 +77,6 @@ def battle():
 def results():
     chosen_attribute_hashed = request.form["attribute"]
     chosen_attribute = chosen_attribute_hashed.replace("#", " ")
-    print(chosen_attribute)
     results = game.compare_attributes(chosen_attribute)
     quote = game.get_quote()
     player_card_length = len(game.player.cards)
