@@ -25,11 +25,7 @@ To run this program, you will need to generate your own API key for the Google K
 - On main.py click 'run'
 - After a few seconds, you should see this line on the terminal:
     Running on http://127.0.0.1:5000
-- Go to your browser, type localhost:5000 and click enter. 
-
-
-
-
+- Go to your browser, type localhost:5000 and click enter.
 
 ## Set up
 pip install mysql-connector-python  
