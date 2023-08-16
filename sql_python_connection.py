@@ -1,41 +1,62 @@
 import mysql.connector
-from config import USER, PASSWORD, HOST
-
+from card_class import Card
 
 class DbConnectionError(Exception):
     pass
 
+class PlayerDeck:
+    def __init__(self, database_path):
+        self.database_path = database_path
+        self.categories = self.load_categories()
 
-def _connect_to_db(player_cards):
-    cnx = mysql.connector.connect(
-        host=HOST,
-        user=USER,
-        password=PASSWORD,
-        auth_plugin='mysql_native_password',
-        database=player_cards
-    )
-    return cnx
+    def load_categories(self):
+        categories = {}
+        with mysql.connector.connect(**self.database_path) as connection:
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute("SELECT id, name FROM Categories")
+            rows = cursor.fetchall()
+            for row in rows:
+                category_id, category_name = row['id'], row['name']
+                categories[category_name] = self.load_cards_by_category(category_id, connection)
+        return categories
 
+    def load_cards_by_category(self, category_id, connection):
+        cards = []
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute("SELECT id, name, image FROM Cards WHERE category_id = %s", (category_id,))
+        rows = cursor.fetchall()
+        for row in rows:
+            card_id, card_name, card_image = row['id'], row['name'], row['image']
+            attributes = self.load_attributes_for_card(card_id, connection)
+            cards.append(Card(card_name, card_image, attributes))
+        cursor.close()
+        return cards
 
-def get_all_records():
-    try:
-        db_name = 'player_cards'  # update as required
-        db_connection = _connect_to_db(player_cards)
-        cur = db_connection.cursor()
-        print("Connected to DB: %s" % player_cards)
+    def load_attributes_for_card(self, card_id, connection):
+        attributes = {}
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute("SELECT a.name AS attribute_name, ca.score FROM Attributes a JOIN Card_Attribute_Score ca ON a.id = ca.attribute_id WHERE ca.card_id = %s", (card_id,))
+        rows = cursor.fetchall()
+        for row in rows:
+            attributes[row['attribute_name']] = row['score']
+        cursor.close()
+        return attributes
 
-        query = """SELECT * FROM player_cards"""
-        cur.execute(query)
-        result = cur.fetchall()  # this is a list with db records where each record is a tuple
+# Replace with your actual database configuration
+db_config = {
+    'host': 'localhost',
+    'user': 'root',
+    'password': '',
+    'database': 'player_cards'
+}
 
-        for i in result:
-            print(i)
-        cur.close()
+# Create an instance of the PlayerDeck class
+player_deck = PlayerDeck(db_config)
 
-    except Exception:
-        raise DbConnectionError("Failed to read data from DB")
-
-    finally:
-        if db_connection:
-            db_connection.close()
-            print("DB connection is closed")
+# Access the categories and cards
+for category, cards in player_deck.categories.items():
+    print(f"Category: {category}")
+    for card in cards:
+        print(f"Card: {card.name}")
+        print(f"Attributes: {card.attributes}")
+        print("---")
