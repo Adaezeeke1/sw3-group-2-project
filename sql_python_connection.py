@@ -17,7 +17,7 @@ class PlayerDeck:
             cursor.execute("SELECT id, name FROM Categories")
             rows = cursor.fetchall()
             for row in rows:
-                category_id, category_name = row['id'], row['name']
+                category_id, category_name = row['category_id'], row['name']
                 categories[category_name] = self.load_cards_by_category(category_id, connection)
         return categories
 
@@ -27,7 +27,7 @@ class PlayerDeck:
         cursor.execute("SELECT id, name, image FROM Cards WHERE category_id = %s", (category_id,))
         rows = cursor.fetchall()
         for row in rows:
-            card_id, card_name, card_image = row['id'], row['name'], row['image']
+            card_id, card_name, card_image = row['card_id'], row['name'], row['image']
             attributes = self.load_attributes_for_card(card_id, connection)
             cards.append(Card(card_name, card_image, attributes))
         cursor.close()
