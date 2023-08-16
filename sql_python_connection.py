@@ -1,5 +1,6 @@
 import mysql.connector
 from card_class import Card
+from config import db_config
 
 class DbConnectionError(Exception):
     pass
