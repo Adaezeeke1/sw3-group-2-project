@@ -14,7 +14,7 @@ class PlayerDeck:
         categories = {}
         with mysql.connector.connect(**self.database_path) as connection:
             cursor = connection.cursor(dictionary=True)
-            cursor.execute("SELECT id, name FROM Categories")
+            cursor.execute("SELECT category_id, name FROM Categories")  # Change 'id' to 'category_id'
             rows = cursor.fetchall()
             for row in rows:
                 category_id, category_name = row['category_id'], row['name']
@@ -24,7 +24,7 @@ class PlayerDeck:
     def load_cards_by_category(self, category_id, connection):
         cards = []
         cursor = connection.cursor(dictionary=True)
-        cursor.execute("SELECT id, name, image FROM Cards WHERE category_id = %s", (category_id,))
+        cursor.execute("SELECT card_id, name, image FROM Cards WHERE category_id = %s", (category_id,))
         rows = cursor.fetchall()
         for row in rows:
             card_id, card_name, card_image = row['card_id'], row['name'], row['image']
@@ -36,14 +36,17 @@ class PlayerDeck:
     def load_attributes_for_card(self, card_id, connection):
         attributes = {}
         cursor = connection.cursor(dictionary=True)
-        cursor.execute("SELECT a.name AS attribute_name, ca.score FROM Attributes a JOIN Card_Attribute_Score ca ON a.id = ca.attribute_id WHERE ca.card_id = %s", (card_id,))
+        cursor.execute(
+            "SELECT a.name AS attribute_name, ca.score FROM Attributes a JOIN Card_Attribute_Score ca ON a.attribute_id = ca.attribute_id WHERE ca.card_id = %s",
+            (card_id,))
+
         rows = cursor.fetchall()
         for row in rows:
             attributes[row['attribute_name']] = row['score']
         cursor.close()
         return attributes
 
-# Replace with your actual database configuration
+
 db_config = {
     'host': 'localhost',
     'user': 'root',
