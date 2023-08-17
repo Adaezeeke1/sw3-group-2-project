@@ -79,11 +79,13 @@ class TestAttributeComparison(unittest.TestCase):
 
 class TestCardChoice(unittest.TestCase):
     def setUp(self):
-        self.game = FeministHeroesVsChallenges()
-        self.game.player.cards = [MockCard("Card 1", None), MockCard("Card 2", None)]
+        # This creates an empty object which we can add more things to (like the .cards)
+        # Not sure if this is best practice but it doesn't seem worth initialising a whole game object to test if that one function works
+        self.player = lambda: None
+        self.player.cards = [MockCard("Card 1", None), MockCard("Card 2", None)]
 
     def test_card_choice(self):
-        chosen_card = self.game.choose_card(1)
+        chosen_card = FeministHeroesVsChallenges.choose_card(self, 1)
         self.assertEqual(chosen_card.name, "Card 2")
 
 class MockFeministHeroesVsChallenges:
