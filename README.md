@@ -7,3 +7,4 @@ pip install requests
 
 ## UML Diagram
 ![image](https://github.com/Adaezeeke1/sw3-group-2-project/blob/main/UML.jpg)
+
