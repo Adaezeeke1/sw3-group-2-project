@@ -1,6 +1,8 @@
 import unittest
 from main import FeministHeroesVsChallenges, PlayerDeck
+from main import app
 from project_knowledge import get_quote
+from unittest.mock import patch
 
 class TestGetQuote(unittest.TestCase):
     def test_get_quote(self):
@@ -79,14 +81,13 @@ class TestAttributeComparison(unittest.TestCase):
 
 class TestCardChoice(unittest.TestCase):
     def setUp(self):
-        # This creates an empty object which we can add more things to (like the .cards)
-        # Not sure if this is best practice but it doesn't seem worth initialising a whole game object to test if that one function works
         self.player = lambda: None
         self.player.cards = [MockCard("Card 1", None), MockCard("Card 2", None)]
 
     def test_card_choice(self):
         chosen_card = FeministHeroesVsChallenges.choose_card(self, 1)
         self.assertEqual(chosen_card.name, "Card 2")
+        self.assertEqual(len(self.player.cards), 1)
 
 class MockFeministHeroesVsChallenges:
     def __init__(self):
@@ -100,6 +101,13 @@ class MockCard:
         self.name = name
         self.attributes = attributes
 
+class TestFlaskRoutes(unittest.TestCase):
+    def setUp(self):
+        self.client = app.test_client()
+    @patch("main.FeministHeroesVsChallenges")
+    def test_home_route(self, mock_game):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
 
 if __name__ == '__main__':
     unittest.main()
