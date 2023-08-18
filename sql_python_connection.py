@@ -1,6 +1,7 @@
 import mysql.connector
 from card_class import Card
-from config import db_config
+import random
+#from config import db_config
 
 class DbConnectionError(Exception):
     pass
@@ -9,6 +10,7 @@ class PlayerDeck:
     def __init__(self, database_path):
         self.database_path = database_path
         self.categories = self.load_categories()
+        self.cards = self.generate_player_cards()
 
     def load_categories(self):
         categories = {}
@@ -45,6 +47,17 @@ class PlayerDeck:
             attributes[row['attribute_name']] = row['score']
         cursor.close()
         return attributes
+
+    def generate_player_cards(self):
+        player_cards = []
+        while len(player_cards) < 4 and any(self.categories.values()):
+            category = random.choice(list(self.categories.keys()))
+            if self.categories[category]:
+                card = random.choice(self.categories[category])
+                card.fetch_quote()  # Implement this method to fetch the quote for the card
+                player_cards.append(card)
+                self.categories[category].remove(card)
+        return player_cards
 
 
 db_config = {
