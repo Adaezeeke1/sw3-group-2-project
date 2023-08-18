@@ -57,6 +57,8 @@ db_config = {
 # Create an instance of the PlayerDeck class
 player_deck = PlayerDeck(db_config)
 
+print (player_deck)
+
 # Access the categories and cards
 for category, cards in player_deck.categories.items():
     print(f"Category: {category}")
