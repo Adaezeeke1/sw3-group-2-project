@@ -5,10 +5,17 @@ from project_knowledge import get_quote
 from unittest.mock import patch
 
 class TestGetQuote(unittest.TestCase):
-    def test_get_quote(self):
+    def test_get_quote_valid_input(self):
         quote = get_quote("Marilyn Monroe")
         self.assertIsNotNone(quote)
 
+    def test_get_quote_invalid_input(self):
+        quote = get_quote("")
+        self.assertIsNone(quote)
+
+    def test_get_quote_exception_handling(self):
+        with self.assertRaises(Exception):
+            get_quote()
 
 class TestPlayerDeck(unittest.TestCase):
     def setUp(self):
