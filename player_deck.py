@@ -1,6 +1,6 @@
 import random
 from card_class import Card
-class PlayerDeck:
+'''class PlayerDeck:
     def __init__(self):
         self.categories = {
             "Artist": [
@@ -55,4 +55,4 @@ class PlayerDeck:
                 card.fetch_quote()
                 player_cards.append(card)
                 self.categories[category].remove(card)
-        return player_cards
+        return player_cards'''
