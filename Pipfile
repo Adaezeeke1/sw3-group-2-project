@@ -7,6 +7,7 @@ name = "pypi"
 requests = "*"
 flask = "*"
 mysql-connector-python = "*"
+flask-testing = "*"
 
 [dev-packages]
 
