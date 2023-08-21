@@ -22,3 +22,5 @@ for attribute in attributes:
 
 cursor.close()
 connection.close()
+
+# Added details to help with sql setup
