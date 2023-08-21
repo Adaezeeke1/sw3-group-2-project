@@ -95,6 +95,9 @@ def end_game():
                            computer_score=game.computer_score, player_score=game.player_score)
 
 
+game = FeministHeroesVsChallenges()
+
+
 if __name__ == "__main__":
     game = FeministHeroesVsChallenges()
     app.run(debug=True)
