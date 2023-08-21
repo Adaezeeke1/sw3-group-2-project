@@ -1,6 +1,8 @@
 import unittest
 from project_knowledge import get_quote
-from main import PlayerDeck, FeministHeroesVsChallenges
+from main import app, PlayerDeck, FeministHeroesVsChallenges
+from sql_python_connection import PlayerDeck
+from sql_python_connection import db_config
 
 
 class TestGetQuote(unittest.TestCase):
@@ -11,7 +13,7 @@ class TestGetQuote(unittest.TestCase):
 
 class TestPlayerDeck(unittest.TestCase):
     def setUp(self):
-        self.player_deck = PlayerDeck()
+        self.player_deck = PlayerDeck(db_config)
 
     def test_generate_player_cards(self):
         player_cards = self.player_deck.generate_player_cards()
@@ -54,6 +56,26 @@ class TestCardChoice(unittest.TestCase):
 class MockCard:
     def __init__(self, name):
         self.name = name
+
+
+class TestGameInitialization(unittest.TestCase):
+    def setUp(self):
+        self.game = FeministHeroesVsChallenges()
+
+    def test_player_deck_initialized(self):
+        self.assertIsNotNone(self.game.player_deck)
+
+    def test_player_initialized(self):
+        self.assertIsNotNone(self.game.player)
+
+    def test_challenge_deck_initialized(self):
+        self.assertIsNotNone(self.game.challenge_deck)
+
+    def test_player_score_initialized(self):
+        self.assertEqual(self.game.player_score, 0)
+
+    def test_computer_score_initialized(self):
+        self.assertEqual(self.game.computer_score, 0)
 
 
 if __name__ == '__main__':
