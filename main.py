@@ -12,6 +12,7 @@ class FeministHeroesVsChallenges:
         self.player_deck = PlayerDeck(db_config)  #This has changed
         self.player = Player(self.player_deck)
         self.challenge_deck = ChallengeDeck()
+        self.challenge_card = self.challenge_deck.cards[0]
         self.player_score = 0
         self.computer_score = 0
 
