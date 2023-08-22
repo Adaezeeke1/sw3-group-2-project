@@ -3,6 +3,7 @@ from class_player import Player
 from sql_python_connection import PlayerDeck
 from sql_python_connection import db_config
 from challenge_deck import ChallengeDeck
+import random
 
 app = Flask(__name__)
 
@@ -72,7 +73,10 @@ def choose_cards():
 
 @app.route("/battle", methods=["POST", "GET"])
 def battle():
-    choice = request.form["choice"]
+    try:
+        choice = request.form["choice"]
+    except KeyError:
+        choice = "0"
     game.player_card = game.player.cards[int(choice)]
     game.choose_card(int(choice))
     return render_template("battle.html", player_card=game.player_card, challenge_card=game.challenge_card)
@@ -80,16 +84,21 @@ def battle():
 
 @app.route("/results", methods=["POST", "GET"])
 def results():
-    chosen_attribute_hashed = request.form["attribute"]
-    chosen_attribute = chosen_attribute_hashed.replace("#", " ")
-    results = game.compare_attributes(chosen_attribute)
-    quote = game.get_quote()
-    player_card_length = len(game.player.cards)
-    challenge_card_length = len(game.challenge_deck.cards)
-    return render_template("result.html", player_card=game.player_card, challenge_card=game.challenge_card,
-                           results=results, player_score=game.player_score,
-                           computer_score=game.computer_score, quote=quote,
-                           player_card_length=player_card_length, challenge_card_length=challenge_card_length)
+    try:
+        chosen_attribute_hashed = request.form["attribute"]
+    except KeyError:
+        chosen_attribute = random.choice(list(game.challenge_card.attributes.keys()))
+    else:
+        chosen_attribute = chosen_attribute_hashed.replace("#", " ")
+    finally:
+        results = game.compare_attributes(chosen_attribute)
+        quote = game.get_quote()
+        player_card_length = len(game.player.cards)
+        challenge_card_length = len(game.challenge_deck.cards)
+        return render_template("result.html", player_card=game.player_card, challenge_card=game.challenge_card,
+                                results=results, player_score=game.player_score,
+                                computer_score=game.computer_score, quote=quote,
+                                player_card_length=player_card_length, challenge_card_length=challenge_card_length)
 
 
 @app.route("/end", methods=["POST", "GET"])
@@ -97,9 +106,6 @@ def end_game():
     win_status = game.check_win()
     return render_template("end.html", win_status=win_status,
                            computer_score=game.computer_score, player_score=game.player_score)
-
-
-game = FeministHeroesVsChallenges()
 
 
 if __name__ == "__main__":
