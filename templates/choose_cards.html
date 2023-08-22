@@ -8,27 +8,20 @@
 </head>
 <body>
     <div class = "mainContainer">
-        <div class = "horizontalContainer">
-            <div class = "challengeContainer">
-                <div><p>Challenge: {{challenge_card.name}}</p></div>
-                <div><img class = "smallImage" src="{{ url_for('static',filename='images/{}'.format(challenge_card.image))}}"></div>
-            </div>
-        </div>
+        <div class = "center"><div class = "challengeContainer"><p id = "challenge">Challenge: {{challenge_card.name}}</p></div></div>
         <form action = "/battle" method = "POST">
-            <div class = "cardContainer">
+            <div id = "cardContainer">
                 {% for i in range(0, length): %}
                 <div class = "basicplayercard">
                     <p class = "name">{{player_cards[i].name}}</p>
-                    <div class = "imageContainer"><img class = "img" src="{{ url_for('static',filename='images/{}'.format(player_cards[i].image))}}"></div>
-                    <div class = "radioContainer">
-                        <input type = "radio" name = "choice" id = "card" value = {{i}}>
-                        <label for="card">Select This Card</label>
-                    </div>
+                    <div class = "image"><img></div>
+                    <input type = "radio" name = "choice" id = "card" value = {{i}}>
                 </div>
                 {%endfor%}
             </div>
-            <div class = "playButton"><button type = "submit">Ready to Battle</button></div>
+            <div class = "playButton"><button type = "submit">Submit</button></div>
         </form>
+
     </div>
 </body>
 </html>

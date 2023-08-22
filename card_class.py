@@ -1,6 +1,6 @@
 from project_knowledge import get_quote
 class Card:
-    def __init__(self, name, image, attributes, quote=None):
+    def __init__(self, name, attribute_names, attribute_scores, category, quote = None):
         self.name = name
         self.attributes = attributes
         self.quote = quote
