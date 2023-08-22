@@ -1,8 +1,9 @@
 import unittest
 from feminist_heroes_class import FeministHeroesVsChallenges
 from project_knowledge import get_quote
-from sql_python_connection import PlayerDeck
-from sql_python_connection import db_config
+from player_deck_sql_connection import PlayerDeck
+from player_deck_sql_connection import player_db_config
+from challenge_deck_sql_connection import challenge_db_config
 
 class TestGetQuote(unittest.TestCase):
     def test_get_quote_valid_input(self):
@@ -20,7 +21,7 @@ class TestGetQuote(unittest.TestCase):
 
 class TestPlayerDeck(unittest.TestCase):
     def setUp(self):
-        self.player_deck = PlayerDeck(db_config)
+        self.player_deck = PlayerDeck(player_db_config)
 
     def test_player_deck_setup(self):
         self.assertIsInstance(self.player_deck, PlayerDeck)

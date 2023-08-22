@@ -1,13 +1,14 @@
-from sql_python_connection import PlayerDeck
 from class_player import Player
-from sql_python_connection import db_config
-from challenge_deck import ChallengeDeck
+from player_deck_sql_connection import PlayerDeck
+from player_deck_sql_connection import player_db_config
+from challenge_deck_sql_connection import challenge_db_config
+from challenge_deck_sql_connection import ChallengeDeck
 
 class FeministHeroesVsChallenges:
     def __init__(self):
-        self.player_deck = PlayerDeck(db_config)
+        self.player_deck = PlayerDeck(player_db_config)
         self.player = Player(self.player_deck)
-        self.challenge_deck = ChallengeDeck()
+        self.challenge_deck = ChallengeDeck(challenge_db_config)
         self.challenge_card = self.challenge_deck.cards[0]  # This has changed
         self.player_score = 0
         self.computer_score = 0
