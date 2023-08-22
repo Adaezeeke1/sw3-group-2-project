@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static',    filename='css/main.css') }}">
-    <title>Result</title>
+    <title>See Results</title>
 </head>
 <body>
-    <div id = "cardContainer">
+    <div class = "cardContainer">
         <div class = "playercard">
             <p class = "name">{{player_card.name}}</p>
-            <div class = "image"><img></div>
+            <div class = "imageContainer"><img class = "img" src="{{ url_for('static',filename='images/{}'.format(player_card.image))}}"></div>
                 <div class = "cardbottom">
                     <div class = "attributes">
                         {% for attribute, value in player_card.attributes.items(): %}
@@ -22,7 +22,7 @@
         </div>
         <div class = "computercard">
             <p class = "name">{{challenge_card.name}}</p>
-            <div class = "image"><img></div>
+            <div class = "imageContainer"><img class = "img" src="{{ url_for('static',filename='images/{}'.format(challenge_card.image))}}"></div>
                 <div class = "attributes">
                     {% for attribute, value in challenge_card.attributes.items(): %}
                     <p class = "computerattribute">{{attribute}}: {{value}}</p>
@@ -30,23 +30,24 @@
                 </div>
         </div>
     </div>
-        <div class = "center">
+        <div class = "horizontalContainer">
             <div class = "resultContainer"><p class = "result">Player Score: {{player_score}}</p></div>
             <div class = "resultContainer"><p class = "result">{{results}}</p></div>
             <div class = "resultContainer"><p class = "result">Computer Score: {{computer_score}}</p></div>
         </div>
-        <div>
-            {% if player_card_length > 0 and challenge_card_length > 0: %}
-            <form action="/submit/" method="POST">
-                <button type = "submit" class = "playButton">Next Round</button>
-            </form>
-            {% endif %}
-        </div>
+        <div class = "cardContainer">
+            <div>
+                {% if player_card_length > 0 and challenge_card_length > 0: %}
+                <form action="/submit/" method="POST">
+                    <button type = "submit">Next Round</button>
+                </form>
+                {% endif %}
+            </div>
             <div>
                 <form action="/end" method="POST">
-                    <button type = "submit" class = "playButton">End Game</button>
+                    <button type = "submit">End Game</button>
                 </form>
+            </div>
         </div>
-    <script src = "app.js"></script>
 </body>
 </html>
