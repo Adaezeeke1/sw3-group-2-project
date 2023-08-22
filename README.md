@@ -15,11 +15,8 @@ To run this program, you will need to generate your own API key for the Google K
 
 ### Adding your API key to the project:
 - Navigate to the parent directory of the project (the directory that contains the main.py file).
-- Create a new file called utilities.py
-- Create a variable called API_KEY and assign your API key (as a string) to this variable. 
-- For example, your utilities.py file should look like this:
-
-    API_KEY = "CopyYourAPIKeyHere"
+- Go to the config.py file 
+- Copy your API key into the variable called API_KEY (inside the speech marks)."
 
 ## Running the program:
 - On main.py click 'run'

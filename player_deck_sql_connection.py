@@ -1,7 +1,7 @@
 import mysql.connector
 from card_class import Card
 import random
-from config import db_config
+from config import player_db_config
 
 class DbConnectionError(Exception):
     pass
@@ -58,24 +58,3 @@ class PlayerDeck:
                 player_cards.append(card)
                 self.categories[category].remove(card)
         return player_cards
-
-
-# db_config = {
-#     'host': 'localhost',
-#     'user': 'root',
-#     'password': '',
-#     'database': 'player_cards'
-# }
-#
-# # Create an instance of the PlayerDeck class
-# player_deck = PlayerDeck(db_config)
-#
-# print (player_deck)
-#
-# # Access the categories and cards
-# for category, cards in player_deck.categories.items():
-#     print(f"Category: {category}")
-#     for card in cards:
-#         print(f"Card: {card.name}")
-#         print(f"Attributes: {card.attributes}")
-#         print("---")
