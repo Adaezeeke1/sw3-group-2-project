@@ -1,11 +1,9 @@
 import unittest
-from main import FeministHeroesVsChallenges, PlayerDeck
-from main import app
+from main import FeministHeroesVsChallenges
 from project_knowledge import get_quote
-from unittest.mock import patch
 from sql_python_connection import PlayerDeck
 from sql_python_connection import db_config
-import mysql.connector
+
 
 class TestGetQuote(unittest.TestCase):
     def test_get_quote_valid_input(self):
@@ -20,17 +18,21 @@ class TestGetQuote(unittest.TestCase):
         with self.assertRaises(Exception):
             get_quote()
 
+
 class TestPlayerDeck(unittest.TestCase):
     def setUp(self):
         self.player_deck = PlayerDeck(db_config)
+
     def test_player_deck_setup(self):
         self.assertIsInstance(self.player_deck, PlayerDeck)
         self.assertIsNotNone(self.player_deck.database_path)
         self.assertIsNotNone(self.player_deck.categories)
         self.assertIsNotNone(self.player_deck.cards)
+
     def test_load_categories(self):
         categories = self.player_deck.load_categories()
         self.assertEqual(len(categories), 7)
+
     def test_generate_player_cards(self):
         player_cards = self.player_deck.generate_player_cards()
         self.assertEqual(len(player_cards), 4)
@@ -73,6 +75,7 @@ class TestAttributeComparison(unittest.TestCase):
 
     def setUp(self):
         self.game = MockFeministHeroesVsChallenges()
+        
     def test_player_score_higher(self):
         player_card = MockCard(name = None, attributes={'Singing Voice': 10, 'Creativity': 7, 'Painting': 0, 'Composing': 5})
         challenge_card = MockCard(name = None, attributes = {'Singing Voice': 8, 'Creativity': 5, 'Composing': 4})
@@ -89,11 +92,11 @@ class TestAttributeComparison(unittest.TestCase):
         result = FeministHeroesVsChallenges.compare_attributes(self.game, attribute_choice = "Comedy")
         self.assertEqual("Your Comedy of 6 is lower than 7. You lose the round!", result)
 
-
     # Let's change the message here to be that the numbers are equal and you win. As it is, it says the number is higher and it's not true.
+
     def test_scores_equal(self):
-        challenge_card = MockCard(name = None, attributes = {'Resilience': 7, 'Determination': 9, 'Confidence': 6} )
-        player_card = MockCard(name= None, attributes={'Confidence': 6, 'Activism': 10, 'Leadership': 10, 'Inspiration': 10})
+        challenge_card = MockCard(name=None, attributes = {'Resilience': 7, 'Determination': 9, 'Confidence': 6} )
+        player_card = MockCard(name=None, attributes={'Confidence': 6, 'Activism': 10, 'Leadership': 10, 'Inspiration': 10})
         self.game.player_card = player_card
         self.game.challenge_card = challenge_card
         result = FeministHeroesVsChallenges.compare_attributes(self.game, attribute_choice="Confidence")
@@ -101,7 +104,7 @@ class TestAttributeComparison(unittest.TestCase):
 
     def test_attribute_not_in_player_card(self):
         challenge_card = MockCard(name=None, attributes={'Political Influence': 8, 'Social Influence': 8, 'Activism': 7})
-        player_card = MockCard(name= None, attributes={'Physical Fitness': 9, 'Determination': 9, 'Resilience': 8, 'Confidence': 8})
+        player_card = MockCard(name=None, attributes={'Physical Fitness': 9, 'Determination': 9, 'Resilience': 8, 'Confidence': 8})
         self.game.player_card = player_card
         self.game.challenge_card = challenge_card
         result = FeministHeroesVsChallenges.compare_attributes(self.game, attribute_choice="Social Influence")
@@ -116,6 +119,8 @@ class TestCardChoice(unittest.TestCase):
         chosen_card = FeministHeroesVsChallenges.choose_card(self, 1)
         self.assertEqual(chosen_card.name, "Card 2")
         self.assertEqual(len(self.player.cards), 1)
+
+
 class MockFeministHeroesVsChallenges:
     def __init__(self):
         self.player_deck = None
@@ -123,10 +128,13 @@ class MockFeministHeroesVsChallenges:
         self.challenge_deck = None
         self.player_score = 0
         self.computer_score = 0
+
+
 class MockCard:
     def __init__(self, name, attributes):
         self.name = name
         self.attributes = attributes
+
 
 if __name__ == '__main__':
     unittest.main()

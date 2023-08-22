@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from class_player import Player
-from sql_python_connection import PlayerDeck  #This has changed
-from sql_python_connection import db_config  #This has changed
+from sql_python_connection import PlayerDeck
+from sql_python_connection import db_config
 from challenge_deck import ChallengeDeck
 
 app = Flask(__name__)
@@ -9,10 +9,10 @@ app = Flask(__name__)
 
 class FeministHeroesVsChallenges:
     def __init__(self):
-        self.player_deck = PlayerDeck(db_config)  #This has changed
+        self.player_deck = PlayerDeck(db_config)
         self.player = Player(self.player_deck)
         self.challenge_deck = ChallengeDeck()
-        self.challenge_card = self.challenge_deck.cards[0]
+        self.challenge_card = self.challenge_deck.cards[0]  # This has changed
         self.player_score = 0
         self.computer_score = 0
 
@@ -94,6 +94,9 @@ def end_game():
     win_status = game.check_win()
     return render_template("end.html", win_status=win_status,
                            computer_score=game.computer_score, player_score=game.player_score)
+
+
+game = FeministHeroesVsChallenges()
 
 
 if __name__ == "__main__":
