@@ -1,5 +1,5 @@
 import requests
-from utilities import API_KEY
+from config import API_KEY
 
 def get_quote(name):
     api_key = API_KEY
