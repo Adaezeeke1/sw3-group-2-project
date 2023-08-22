@@ -41,24 +41,3 @@ class ChallengeDeck:
             return self.cards.pop(0)
         else:
             return None
-
-# db_config = {
-#     'host': '127.0.0.1',
-#     'user': 'root',
-#     'password': 'Jgm1fdopsw',
-#     'database': 'challenge_cards'
-# }
-
-# # Creates an instance of the ChallengeDeck class
-# challenge_deck = ChallengeDeck(db_config)
-#
-# # Simulates drawing cards from the challenge deck
-# while True:
-#     card = challenge_deck.draw()
-#     if card is None:
-#         print("No more cards in the challenge deck.")
-#         break
-#     print(f"Drawn card: {card}")
-#     print(f"Drawn card name: {card.name}")
-#     print(f"Drawn card image: {card.image}")
-#     print(f"Drawn card attributes: {card.attributes}")
