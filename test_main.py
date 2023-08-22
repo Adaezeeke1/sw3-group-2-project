@@ -46,13 +46,6 @@ class TestChooseCardsRoute(TestCase):
         response = self.client.post('/submit/')
         self.assertIn(b'Choose Card', response.data)
 
-
-# There is an AttributeError: 'AttributeError: 'FeministHeroesVsChallenges' object has no attribute 'challenge_card'
-# This is because of an issue in main.py, under the @app_route battle method:
-# 'Unresolved attribute reference 'challenge_card' for class 'FeministHeroesVsChallenges''
-# For some reason it works with Pytest configuration but does not with unittest, but I did not comment it out.
-# The battle route in main.py needs to be looked at again.
-
 class TestBattleRoute(TestCase):
     def create_app(self):
         return app
@@ -67,27 +60,6 @@ class TestBattleRoute(TestCase):
         response = self.client.post('/battle', data=form_data, follow_redirects=True)
         self.assert200(response)
         self.assert_template_used('battle.html')
-
-# I tried to initialize the game under the Test class, but it did not work at all, so I commented it out
-
-# class TestBRoute(TestCase):
-#     def create_app(self):
-#         return app
-#
-#     def setUp(self):
-#         self.game = FeministHeroesVsChallenges()
-#
-#     def test_b_route(self):
-#         form_data = {'choice': '0'}  # Assuming you're testing the first choice
-#         response = self.client.post('/battle', data=form_data, follow_redirects=True)
-#         self.assert200(response)
-#         self.assert_template_used('battle.html')
-#
-#     def test_b_route_status_code(self):
-#         form_data = {'choice': '0'}
-#         response = self.client.post('/battle', data=form_data, follow_redirects=True)
-#         self.assertEqual(response.status_code, 200)
-
 
 class TestResultsRoute(TestCase):
     def create_app(self):
