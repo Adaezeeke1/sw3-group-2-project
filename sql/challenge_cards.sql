@@ -55,15 +55,15 @@ VALUES
     (28, 'Charisma'),
     (29, 'Confidence');
 
-INSERT INTO Cards (card_id, name, image)
-VALUES
-    (1, 'Melodies in paint', 'artist.jpg'),
-    (2, 'Take centre stage', 'actors.jpg'),
-    (3, 'Pioneers of knowledge', 'academics.jpg'),
-    (4, 'Change minds, change lives', 'activist.jpg'),
-    (5, 'Science enthusiast', 'scientist.jpg'),
-    (6, 'Quest for justice', 'politician.jpg'),
-    (7, 'Pursuit of athletic excellence', 'sports.jpg');
+INSERT INTO Cards (card_id, name, category_id, image) 
+VALUES 
+    (1, 'Melodies in paint', 1, 'creativity.png'),
+    (2, 'Take centre stage', 2, 'stage.jpg'),
+    (3, 'Pioneers of knowledge', 3, 'innovation.png'),
+    (4, 'Change minds, change lives', 4, 'influence.jpg'),
+    (5, 'Science enthusiast', 5, 'science.jpg'),
+    (6, 'Quest for justice', 6, 'leadership.png'),
+    (7, 'Pursuit of athletic excellence', 7, 'sport.jpeg');
 
 INSERT INTO Card_Attribute_Score (card_id, attribute_id, score)
 VALUES
