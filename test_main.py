@@ -82,7 +82,7 @@ class TestAttributeComparison(unittest.TestCase):
         self.game.player_card = player_card
         self.game.challenge_card = challenge_card
         result = FeministHeroesVsChallenges.compare_attributes(self.game, attribute_choice = "Creativity")
-        self.assertEqual("Your Creativity of 7 is higher than 5. You win the round!", result)
+        self.assertEqual("Your Creativity of 7 is higher than the challenge score of 5. You win the round!", result)
 
     def test_player_score_lower(self):
         player_card = MockCard(name=None, attributes={'Acting': 10, 'Comedy': 6, 'Charisma': 9, 'Confidence': 8})
@@ -90,17 +90,14 @@ class TestAttributeComparison(unittest.TestCase):
         self.game.player_card = player_card
         self.game.challenge_card = challenge_card
         result = FeministHeroesVsChallenges.compare_attributes(self.game, attribute_choice = "Comedy")
-        self.assertEqual("Your Comedy of 6 is lower than 7. You lose the round!", result)
-
-    # Let's change the message here to be that the numbers are equal and you win. As it is, it says the number is higher and it's not true.
-
+        self.assertEqual("Your Comedy of 6 is lower than the challenge score of 7. You lose the round!", result)
     def test_scores_equal(self):
         challenge_card = MockCard(name=None, attributes = {'Resilience': 7, 'Determination': 9, 'Confidence': 6} )
         player_card = MockCard(name=None, attributes={'Confidence': 6, 'Activism': 10, 'Leadership': 10, 'Inspiration': 10})
         self.game.player_card = player_card
         self.game.challenge_card = challenge_card
         result = FeministHeroesVsChallenges.compare_attributes(self.game, attribute_choice="Confidence")
-        self.assertEqual("Your Confidence of 6 is higher than 6. You win the round!", result)
+        self.assertEqual("Your Confidence of 6 is the same as the challenge score of 6. You win the round!", result)
 
     def test_attribute_not_in_player_card(self):
         challenge_card = MockCard(name=None, attributes={'Political Influence': 8, 'Social Influence': 8, 'Activism': 7})

@@ -28,13 +28,17 @@ class FeministHeroesVsChallenges:
             player_attribute_value = self.player_card.attributes[attribute_choice]
             challenge_attribute_value = self.challenge_card.attributes[attribute_choice]
             if player_attribute_value >= challenge_attribute_value:
-                result = f"Your {attribute_choice} of {player_attribute_value} is higher than " \
-                         f"{challenge_attribute_value}. You win the round!"
+                if player_attribute_value > challenge_attribute_value:
+                    result = f"Your {attribute_choice} of {player_attribute_value} is higher than " \
+                         f"the challenge score of {challenge_attribute_value}. You win the round!"
+                elif player_attribute_value == challenge_attribute_value:
+                    result = f"Your {attribute_choice} of {player_attribute_value} is the same as the challenge " \
+                             f"score of {challenge_attribute_value}. You win the round!"
                 self.player_score += 1
                 return result
             else:
                 result = f"Your {attribute_choice} of {player_attribute_value} is lower than " \
-                         f"{challenge_attribute_value}. You lose the round!"
+                         f"the challenge score of {challenge_attribute_value}. You lose the round!"
                 self.computer_score += 1
                 return result
 
@@ -65,7 +69,6 @@ def choose_cards():
     length = len(game.player.cards)
     return render_template("choose_cards.html", player_cards=game.player.cards,
                            challenge_card=game.challenge_card, length=length)
-
 
 @app.route("/battle", methods=["POST", "GET"])
 def battle():
