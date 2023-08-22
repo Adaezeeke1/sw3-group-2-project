@@ -28,3 +28,4 @@ class ChallengeDeck:
         self.fetch_quotes()
         self.shuffle()
 '''
+
