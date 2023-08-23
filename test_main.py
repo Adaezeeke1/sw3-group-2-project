@@ -46,7 +46,7 @@ class TestBattleRoute(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_battle_route(self):
-        form_data = {'choice': '0'}  # Assuming you're testing the first choice
+        form_data = {'choice': '0'}  
         response = self.client.post('/battle', data=form_data, follow_redirects=True)
         self.assert200(response)
         self.assert_template_used('battle.html')
