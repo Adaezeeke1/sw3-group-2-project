@@ -3,7 +3,7 @@ API_KEY = ""
 player_db_config = {
     'host': 'localhost',
     'user': 'root',
-    'password': '',
+    'password': 'Zxy005676!',
     'database': 'player_cards'
 }
 
