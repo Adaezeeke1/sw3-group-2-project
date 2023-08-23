@@ -16,7 +16,16 @@ To run this program, you will need to generate your own API key for the Google K
 ### Adding your API key to the project:
 - Navigate to the parent directory of the project (the directory that contains the main.py file).
 - Go to the config.py file 
-- Copy your API key into the variable called API_KEY (inside the speech marks)."
+- Copy your API key into the variable called API_KEY (inside the speech marks).
+
+## Setting up the database:
+- Open MySQL (or alternative program of your choice)
+- Run both of the .sql files in the SQL folder (challenge_cards.sql and player_cards.sql)
+- Go to the config.py file and assign your password to the variable PASSWORD (inside the speech marks)
+- In the config.py file, the default host and user has been filled out for you. Ensure that this is correct and change it if not. 
+
+## Installing dependencies
+- Use the command 'pipenv install' to install the dependencies listed in the pipfile.
 
 ## Running the program:
 - On main.py click 'run'
@@ -24,9 +33,6 @@ To run this program, you will need to generate your own API key for the Google K
     Running on http://127.0.0.1:5000
 - Go to your browser, type localhost:5000 and click enter.
 
-## Set up
-pip install mysql-connector-python  
-pip install requests  
 ## System design
 ![image](https://github.com/Adaezeeke1/sw3-group-2-project/blob/main/system%20design.png)
 
