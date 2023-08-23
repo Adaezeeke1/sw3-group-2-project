@@ -3,7 +3,9 @@ from feminist_heroes_class import FeministHeroesVsChallenges
 from project_knowledge import get_quote
 from player_deck_sql_connection import PlayerDeck
 from player_deck_sql_connection import player_db_config
+from challenge_deck_sql_connection import ChallengeDeck
 from challenge_deck_sql_connection import challenge_db_config
+from card_class import Card
 
 class TestGetQuote(unittest.TestCase):
     def test_get_quote_valid_input(self):
@@ -37,6 +39,7 @@ class TestPlayerDeck(unittest.TestCase):
         player_cards = self.player_deck.generate_player_cards()
         self.assertEqual(len(player_cards), 4)
 
+
 class TestGameInitialization(unittest.TestCase):
     def setUp(self):
         self.game = FeministHeroesVsChallenges()
@@ -47,7 +50,6 @@ class TestGameInitialization(unittest.TestCase):
         self.assertIsNotNone(self.game.challenge_deck)
         self.assertEqual(self.game.player_score, 0)
         self.assertEqual(self.game.computer_score, 0)
-
 
 class TestEndGameStatus(unittest.TestCase):
     def setUp(self):
