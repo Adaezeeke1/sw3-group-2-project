@@ -4,18 +4,15 @@ USER = 'root'
 PASSWORD = ""
 
 player_db_config = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': '',
+    'host': HOST,
+    'user': USER,
+    'password': PASSWORD,
     'database': 'player_cards'
 }
 
 challenge_db_config = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': '',
+    'host': HOST,
+    'user': USER,
+    'password': PASSWORD,
     'database': 'challenge_cards'
 }
-
-
-
