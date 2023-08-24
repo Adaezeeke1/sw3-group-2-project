@@ -52,3 +52,11 @@ class FeministHeroesVsChallenges:
             return "The challenges have proven to be tough. Keep striving for progress!"
         else:
             return "It's a tie! The battle was intense, but there's still more to conquer!"
+
+    def reset(self):
+        self.player_deck = PlayerDeck(player_db_config)
+        self.player = Player(self.player_deck)
+        self.challenge_deck = ChallengeDeck(challenge_db_config)
+        self.challenge_card = self.challenge_deck.cards[0]  # This has changed
+        self.player_score = 0
+        self.computer_score = 0
