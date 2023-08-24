@@ -6,14 +6,14 @@ PASSWORD = ""
 player_db_config = {
     'host': 'localhost',
     'user': 'root',
-    'password': 'Zxy005676!',
+    'password': '',
     'database': 'player_cards'
 }
 
 challenge_db_config = {
     'host': 'localhost',
     'user': 'root',
-    'password': 'Zxy005676!',
+    'password': '',
     'database': 'challenge_cards'
 }
 
