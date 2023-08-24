@@ -3,7 +3,9 @@ from feminist_heroes_class import FeministHeroesVsChallenges
 from project_knowledge import get_quote
 from player_deck_sql_connection import PlayerDeck
 from player_deck_sql_connection import player_db_config
+from challenge_deck_sql_connection import ChallengeDeck
 from challenge_deck_sql_connection import challenge_db_config
+from card_class import Card
 
 class TestGetQuote(unittest.TestCase):
     def test_get_quote_valid_input(self):
@@ -37,6 +39,33 @@ class TestPlayerDeck(unittest.TestCase):
         player_cards = self.player_deck.generate_player_cards()
         self.assertEqual(len(player_cards), 4)
 
+class TestCardClass(unittest.TestCase):
+    def setUp(self):
+        self.card = Card("Meryl Streep", "test.jpg", {"attribute": 2}, None)
+
+    def test_card_initalisation(self):
+        self.assertIsInstance(self.card, Card)
+        self.assertEqual(self.card.name, "Meryl Streep")
+        self.assertEqual(self.card.image, "test.jpg")
+        self.assertEqual(self.card.attributes, {"attribute": 2})
+        self.assertIsNone(self.card.quote)
+
+class TestChallengeDeck(unittest.TestCase):
+
+    def setUp(self):
+        self.challenge_deck = ChallengeDeck(challenge_db_config)
+
+    def test_challenge_deck_setup(self):
+        self.assertIsInstance(self.challenge_deck, ChallengeDeck)
+        self.assertIsNotNone(self.challenge_deck.database_path)
+        self.assertIsNotNone(self.challenge_deck.cards)
+
+    def test_draw_card(self):
+        initial_length = len(self.challenge_deck.cards)
+        self.challenge_deck.draw()
+        length_after_draw = len(self.challenge_deck.cards)
+        self.assertEqual(initial_length - 1, length_after_draw)
+
 class TestGameInitialization(unittest.TestCase):
     def setUp(self):
         self.game = FeministHeroesVsChallenges()
@@ -47,7 +76,6 @@ class TestGameInitialization(unittest.TestCase):
         self.assertIsNotNone(self.game.challenge_deck)
         self.assertEqual(self.game.player_score, 0)
         self.assertEqual(self.game.computer_score, 0)
-
 
 class TestEndGameStatus(unittest.TestCase):
     def setUp(self):
