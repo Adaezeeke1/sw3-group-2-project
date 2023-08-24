@@ -1,4 +1,4 @@
-API_KEY = "AIzaSyACR8zhfjcuo0D_y_w4FTZS8R4_cdS2pvY"
+API_KEY = ""
 HOST = 'localhost'
 USER = 'root'
 PASSWORD = ""
