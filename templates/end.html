@@ -15,7 +15,11 @@
                 <div class = "resultContainer"><p>Player Score: {{player_score}}</p></div>
             </div>
             <div class = "horizontalContainer"><div class = welcomeContainer><p>{{win_status}}</p></div></div>
-
+            <div class = "horizontalContainer">
+                <form action="/restart" method="POST">
+                <button type="submit">Restart Game</button>
+                </form>
+            </div>
         </div>
     </div>
 </body>
