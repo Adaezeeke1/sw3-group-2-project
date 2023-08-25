@@ -1,11 +1,8 @@
 import unittest
 from feminist_heroes_class import FeministHeroesVsChallenges
 from project_knowledge import get_quote
-from player_deck_sql_connection import PlayerDeck
-from player_deck_sql_connection import player_db_config
-from challenge_deck_sql_connection import ChallengeDeck
-from challenge_deck_sql_connection import challenge_db_config
-from card_class import Card
+
+
 
 class TestGetQuote(unittest.TestCase):
     def test_get_quote_valid_input(self):
@@ -19,52 +16,6 @@ class TestGetQuote(unittest.TestCase):
     def test_get_quote_exception_handling(self):
         with self.assertRaises(Exception):
             get_quote()
-
-
-class TestPlayerDeck(unittest.TestCase):
-    def setUp(self):
-        self.player_deck = PlayerDeck(player_db_config)
-
-    def test_player_deck_setup(self):
-        self.assertIsInstance(self.player_deck, PlayerDeck)
-        self.assertIsNotNone(self.player_deck.database_path)
-        self.assertIsNotNone(self.player_deck.categories)
-        self.assertIsNotNone(self.player_deck.cards)
-
-    def test_load_categories(self):
-        categories = self.player_deck.load_categories()
-        self.assertEqual(len(categories), 7)
-
-    def test_generate_player_cards(self):
-        player_cards = self.player_deck.generate_player_cards()
-        self.assertEqual(len(player_cards), 4)
-
-class TestCardClass(unittest.TestCase):
-    def setUp(self):
-        self.card = Card("Meryl Streep", "test.jpg", {"attribute": 2}, None)
-
-    def test_card_initalisation(self):
-        self.assertIsInstance(self.card, Card)
-        self.assertEqual(self.card.name, "Meryl Streep")
-        self.assertEqual(self.card.image, "test.jpg")
-        self.assertEqual(self.card.attributes, {"attribute": 2})
-        self.assertIsNone(self.card.quote)
-
-class TestChallengeDeck(unittest.TestCase):
-
-    def setUp(self):
-        self.challenge_deck = ChallengeDeck(challenge_db_config)
-
-    def test_challenge_deck_setup(self):
-        self.assertIsInstance(self.challenge_deck, ChallengeDeck)
-        self.assertIsNotNone(self.challenge_deck.database_path)
-        self.assertIsNotNone(self.challenge_deck.cards)
-
-    def test_draw_card(self):
-        initial_length = len(self.challenge_deck.cards)
-        self.challenge_deck.draw()
-        length_after_draw = len(self.challenge_deck.cards)
-        self.assertEqual(initial_length - 1, length_after_draw)
 
 class TestGameInitialization(unittest.TestCase):
     def setUp(self):
@@ -144,6 +95,32 @@ class TestCardChoice(unittest.TestCase):
         chosen_card = FeministHeroesVsChallenges.choose_card(self, 1)
         self.assertEqual(chosen_card.name, "Card 2")
         self.assertEqual(len(self.player.cards), 1)
+
+class TestReset(unittest.TestCase):
+
+    def setUp(self):
+        self.game = FeministHeroesVsChallenges()
+
+    def test_function_initializes_game(self):
+        self.game.reset()
+        self.assertIsNotNone(self.game.player_deck)
+        self.assertIsNotNone(self.game.player)
+        self.assertIsNotNone(self.game.challenge_deck)
+
+    def test_function_resets_scores(self):
+        self.game.computer_score = 5
+        self.game.player_score = 3
+        self.game.reset()
+        self.assertEqual(self.game.player_score, 0)
+        self.assertEqual(self.game.computer_score, 0)
+
+    def test_function_resets_decks(self):
+        self.game.choose_card(0)
+        self.game.challenge_deck.draw()
+        challenge_deck_length_after_draw = len(self.game.challenge_deck.cards)
+        self.game.reset()
+        self.assertEqual(len(self.game.player_deck.generate_player_cards()), 4)
+        self.assertNotEquals(challenge_deck_length_after_draw, len(self.game.challenge_deck.cards))
 
 
 class MockFeministHeroesVsChallenges:

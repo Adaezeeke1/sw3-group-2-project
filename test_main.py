@@ -1,5 +1,6 @@
 from main import app
 from flask_testing import TestCase
+from flask import url_for
 class TestHomeRoute(TestCase):
     def create_app(self):
         return app
@@ -90,3 +91,14 @@ class TestEndRoute(TestCase):
         self.assert_200(response)
         self.assertIn(b'Game Over!', response.data)
 
+class TestRestartRoute(TestCase):
+
+    def create_app(self):
+        return app
+    def test_restart_route(self):
+        response = self.client.post('/restart', follow_redirects=True)
+        self.assert200(response)
+    def test_restart_redirect(self):
+        response = self.client.post(url_for('restart_game'))
+        self.assertIn(b'Redirecting...', response.data)
+        self.assertEqual(response.location, url_for('home'))
