@@ -90,3 +90,12 @@ class TestEndRoute(TestCase):
         self.assert_200(response)
         self.assertIn(b'Game Over!', response.data)
 
+class TestRestart(TestCase):
+    def create_app(self):
+        return app
+
+    def test_restart_game(self):
+        response = self.app.post('/restart', follow_redirects=True)
+
+        self.assertEqual(response.status_code, 200)
+
