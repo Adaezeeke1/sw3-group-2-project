@@ -16,6 +16,3 @@ challenge_db_config = {
     'password': PASSWORD,
     'database': 'challenge_cards'
 }
-
-
-

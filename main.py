@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from feminist_heroes_class import FeministHeroesVsChallenges
 import random
 
@@ -54,10 +54,16 @@ def end_game():
     return render_template("end.html", win_status=win_status,
                            computer_score=game.computer_score, player_score=game.player_score)
 
+@app.route("/restart", methods=["POST"])
+def restart_game():
+    # Reset the game state here
+    game.reset()
+    return redirect(url_for('home'))
+
 
 if __name__ == "__main__":
     game = FeministHeroesVsChallenges()
     app.run(debug=True)
 
 
-game = FeministHeroesVsChallenges()
+# game = FeministHeroesVsChallenges()
