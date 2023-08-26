@@ -7,15 +7,6 @@ CREATE TABLE Categories (
     name VARCHAR(255)
 );
 
-DROP DATABASE IF EXISTS player_cards;
-CREATE DATABASE player_cards;
-USE player_cards;
-
-CREATE TABLE Categories (
-    category_id INT PRIMARY KEY,
-    name VARCHAR(255)
-);
-
 CREATE TABLE Attributes (
     attribute_id INT PRIMARY KEY,
     name VARCHAR(255)
