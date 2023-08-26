@@ -13,7 +13,7 @@ class TestPlayerDeck(unittest.TestCase):
 
     def test_load_categories(self):
         categories = self.player_deck.load_categories()
-        self.assertEqual(len(categories), 7)
+        self.assertEqual(len(categories), 8)
 
     def test_generate_player_cards(self):
         player_cards = self.player_deck.generate_player_cards()

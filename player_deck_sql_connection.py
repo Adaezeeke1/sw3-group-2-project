@@ -16,7 +16,7 @@ class PlayerDeck:
         categories = {}
         with mysql.connector.connect(**self.database_path) as connection:
             cursor = connection.cursor(dictionary=True)
-            cursor.execute("SELECT category_id, name FROM Categories")  # Change 'id' to 'category_id'
+            cursor.execute("SELECT category_id, name FROM Categories")
             rows = cursor.fetchall()
             for row in rows:
                 category_id, category_name = row['category_id'], row['name']
@@ -54,7 +54,7 @@ class PlayerDeck:
             category = random.choice(list(self.categories.keys()))
             if self.categories[category]:
                 card = random.choice(self.categories[category])
-                card.fetch_quote()  # Implement this method to fetch the quote for the card
+                card.fetch_quote()
                 player_cards.append(card)
                 self.categories[category].remove(card)
         return player_cards
