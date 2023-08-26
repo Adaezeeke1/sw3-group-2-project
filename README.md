@@ -38,3 +38,24 @@ To run this program, you will need to generate your own API key for the Google K
 
 ## UML Diagram
 ![image](https://github.com/Adaezeeke1/sw3-group-2-project/blob/main/UML.jpg)
+
+## UML Explanation
+
+Categories: This table is intended to store different categories that cards can belong to.
+The primary purpose of this table is to provide a way to categorize cards, making it easier to organize and retrieve them.
+
+Attributes: This table is used to store different attributes that can be associated with cards.
+
+Attributes could represent characteristics of the cards.
+
+Cards: This table stores information on the cards. The category_id column references the category_id from the Categories table, indicating the category to which the card belongs, allowing efficient categorization and retrieval of cards.
+
+Card_Attribute_Score: 
+This table is designed to store attribute scores for each card.
+It uses composite foreign keys: card_id references the Cards table and attribute_id references the Attributes table.
+This table enables you to associate attributes with cards and assign scores to these attributes on a per-card basis.
+
+Reasons for this Data Model Design:
+The design helps in reducing data redundancy and maintaining data integrity. Each table serves a specific purpose, and data is organized efficiently.The use of foreign keys establishes relationships between tables, enabling you to retrieve related data easily and ensuring referential integrity.
+
+Flexibility: This design allows for easy addition of new categories, attributes, and cards without requiring major changes to the schema.
