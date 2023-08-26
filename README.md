@@ -31,4 +31,5 @@ pip install requests
 ![image](https://github.com/Adaezeeke1/sw3-group-2-project/blob/main/system%20design.png)
 
 ## UML Diagram
-![image](https://github.com/Adaezeeke1/sw3-group-2-project/blob/main/UML.jpg)
+![image](https://github.com/Adaezeeke1/sw3-group-2-project/blob/main/UML%20for%20challenge_cards.jpg)
+![image](https://github.com/Adaezeeke1/sw3-group-2-project/blob/main/UML%20for%20player_cards.jpg)
