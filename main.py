@@ -56,7 +56,6 @@ def end_game():
 
 @app.route("/restart", methods=["POST"])
 def restart_game():
-    # Reset the game state here
     game.reset()
     return redirect(url_for('home'))
 
