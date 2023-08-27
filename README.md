@@ -34,7 +34,7 @@ To run this program, you will need to generate your own API key for the Google K
 - Go to your browser, type localhost:5000 and click enter.
 
 ## System design
-![image](https://github.com/Adaezeeke1/sw3-group-2-project/blob/danielle_add_new_sys_design/system_design.png)
+![image](https://github.com/Adaezeeke1/sw3-group-2-project/blob/main)
 
 ## UML Diagram
 ![image](https://github.com/Adaezeeke1/sw3-group-2-project/blob/main/UML%20for%20challenge_cards.jpg)
